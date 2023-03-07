@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Controllers;
+
+use App\Core\EmailService;
+
+class {{$value[1]}}Email extends EmailService {
+
+    public $mail;
+
+    public function __construct()
+	{       
+        $this->mail = new EmailService();
+    }
+
+    public function index()
+    {
+        $subject = "Email Subject";
+        $altbody = "Email AltBody";
+
+        $body = "
+            <h1>Hello World!</h1>
+            <p>Lorem Ipsum</p>
+        ";
+
+        try {
+            $this->mail->set("sender@email.com.br", "Sender Name");
+            $this->mail->add("recipient@email.com.br", "Recipient Name");
+            $this->mail->content($subject, $body, $altbody);
+            $this->mail->send();
+            return true;
+
+        } catch (\Exception $e) {
+            echo "Error sending email!: {$e}";
+        }
+    }
+
+}

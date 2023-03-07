@@ -1,0 +1,12 @@
+<?php
+
+namespace App\Middlewares;
+
+class {{$value[1]}}Middleware {
+
+    public function index($req, $res)
+    {
+        // initial Middleware
+    }
+
+}

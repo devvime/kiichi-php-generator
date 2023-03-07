@@ -1,0 +1,12 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class {{$value[1]}}Model extends Model
+{
+    protected $table = "{$tableName[1]}";
+    protected $fillable = [];
+    public $timestamps = false;
+}

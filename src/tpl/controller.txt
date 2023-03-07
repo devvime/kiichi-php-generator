@@ -1,0 +1,70 @@
+<?php
+
+namespace App\Controllers;
+
+use App\Core\ControllerService;
+use App\Models\{{$value[1]}}Model;
+
+class {{$value[1]}}Controller extends ControllerService {
+
+    private static ${$value[1]}Model;
+
+    public function __construct()
+    {
+        self::${$value[1]}Model = new {{$value[1]}}Model();
+    }
+
+    public function index($req, $res) {
+        $result = self::${$value[1]}Model->all();
+        $res->json([
+            "status"=>200,
+            "data"=>$result
+        ]);
+    }
+
+    public function find($req, $res)
+    {
+        $result = {{$value[1]}}Model::find($req->params->id);
+        if ($result == null) {
+            $res->json(["status"=>404, "error"=>"Register Not Found..."]);
+            exit;
+        }
+        $res->json([
+            "staus"=>200,
+            "data"=>$result
+        ]);
+    }
+
+    public function store($req, $res) {
+        $data = $this->bindValues($req->body, self::${$value[1]}Model);        
+        $result = $data->save();        
+        if ($result) {
+            $this->index($req, $res);
+        }
+    }
+
+    public function update($req, $res) {
+        $data = {{$value[1]}}Model::find($req->params->id);
+        if ($data == null) {
+            $res->json(["status"=>404, "error"=>"Register Not Found..."]);
+            exit;
+        }
+        $data = $this->bindValues($req->body, $data);
+        $result = $data->save();
+        if ($result) {
+            $this->find($req, $res);
+        }
+    }
+
+    public function destroy($req, $res) {
+        $data = {{$value[1]}}Model::find($req->params->id);
+        if ($data == null) {
+            $res->json(["status"=>404, "error"=>"Register not found!"]);
+            exit;
+        }
+        $result = $data->delete();
+        if ($result) {
+            $this->index($req, $res);
+        }
+    }
+}

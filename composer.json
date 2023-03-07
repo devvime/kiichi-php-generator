@@ -1,0 +1,19 @@
+{
+  "name": "devvime/kiichiGenerator",
+  "description": "Simple Package PHP for generate controllers, models and middlewares.",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Victor Alves Mendes",
+      "email": "victor@susumo.com.br"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "devvime\\kiichiGenerator\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=7.0.0"
+  }
+}
