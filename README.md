@@ -1,6 +1,6 @@
 # Kiitchi Generator
 
-Simple Framework PHP for generate controllers, models and middlewares.
+Simple Package PHP for generate controllers, models and middlewares.
 
 ***
 
