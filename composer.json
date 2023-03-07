@@ -1,5 +1,5 @@
 {
-  "name": "devvime/kiichi-generator",
+  "name": "devvime/kiichi-php-generator",
   "description": "Simple Package PHP for generate controllers, models and middlewares.",
   "license": "MIT",
   "authors": [
