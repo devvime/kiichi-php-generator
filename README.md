@@ -20,8 +20,19 @@ After, in composer.json insert this script.
 
 ```json
 "scripts":{
-        "new": "php -f vendor/devvime/KiitchiGenerator/src/KiitchiGenerator.php"
+        "new": "php -f vendor/devvime/Kiichi-generator/src/KiitchiGenerator.php"
     }
+```
+
+### Create Controller
+
+Create the following directories in the project root:
+
+```
+├── App
+|  ├── Controllers
+|  |── Models
+|  |── Middlewares
 ```
 
 ### Create Controller
