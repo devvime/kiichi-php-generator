@@ -13,7 +13,7 @@ Simple Package PHP for generate controllers, models and middlewares.
 Run the composer command for install this package.
 
 ```
-composer require devvime/kiichi-generator
+composer require devvime/kiichi-php-generator
 ```
 
 After, in composer.json insert this script.
