@@ -24,7 +24,7 @@ After, in composer.json insert this script.
     }
 ```
 
-### Create Controller
+### Create folder structure
 
 Create the following directories in the project root:
 
