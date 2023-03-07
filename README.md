@@ -1,4 +1,4 @@
-# Kiichi Generator
+# Kiichi PHP Generator
 
 Simple Package PHP for generate controllers, models and middlewares.
 
