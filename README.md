@@ -20,7 +20,7 @@ After, in composer.json insert this script.
 
 ```json
 "scripts":{
-        "new": "php -f vendor/devvime/Kiichi-generator/src/KiitchiGenerator.php"
+        "new": "php -f vendor/devvime/Kiichi-php-generator/src/index.php"
     }
 ```
 

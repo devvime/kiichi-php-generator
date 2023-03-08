@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Controllers;
+namespace Devvime\Kiichi\Controllers;
 
-use App\Core\ControllerService;
-use App\Models\{{$value[1]}}Model;
+use Devvime\Kiichi\Engine\ControllerService;
+use Devvime\Kiichi\Models\{{$value[1]}}Model;
 
 class {{$value[1]}}Controller extends ControllerService {
 

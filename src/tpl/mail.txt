@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Controllers;
+namespace Devvime\Kiichi\Controllers;
 
-use App\Core\EmailService;
+use Devvime\Kiichi\Engine\EmailService;
 
 class {{$value[1]}}Email extends EmailService {
 
