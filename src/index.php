@@ -88,21 +88,16 @@ elseif ($comand == 'middleware'):
 
 elseif ($comand == 'mail'):
 
-    if ($argv[2] === '' || $argv[2] === null) {
-        message('error', 'Need to inform the name of the emailController! EX: composer new mail name');
-        exit;
-    }
-
     $content = getTpl('mail', $argv);
 
-    if (file_exists($_SERVER['DOCUMENT_ROOT'] . "App/Controllers/{$argv[2]}Controller.php")) {
-        message('warning', "The emailController '".ucfirst($argv[2])."' already exists in 'App/Controllers/".ucfirst($argv[2])."Controller.php'");
+    if (file_exists($_SERVER['DOCUMENT_ROOT'] . "App/Controllers/EmailServiceController.php")) {
+        message('warning', "The EmailServiceController already exists in 'App/Controllers/EmailServiceController.php'");
         exit;
     } else {
-        $fp = fopen($_SERVER['DOCUMENT_ROOT'] . "App/Controllers/".ucfirst($argv[2])."Controller.php","wb");
+        $fp = fopen($_SERVER['DOCUMENT_ROOT'] . "App/Controllers/EmailServiceController.php","wb");
         fwrite($fp, $content);
         fclose($fp);
-        message('success', "emailController created in 'App/Controllers/".ucfirst($argv[2])."Controller.php'");
+        message('success', "EmailServiceController created in 'App/Controllers/EmailServiceController.php'");
     }
 
 endif;

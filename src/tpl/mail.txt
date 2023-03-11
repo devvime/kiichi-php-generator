@@ -2,36 +2,39 @@
 
 namespace Devvime\Kiichi\Controllers;
 
-use Devvime\Kiichi\Engine\EmailService;
+use Devvime\Kiichi\Engine\ControllerService;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 
-class {{$value[1]}}Email extends EmailService {
+class EmailServiceController extends ControllerService {
 
     public $mail;
 
     public function __construct()
-	{       
-        $this->mail = new EmailService();
+    {
+        $this->mail = new PHPMailer();
+        $this->mail->isSMTP();
+        $this->mail->Host = EMAIL_HOST;
+        $this->mail->Port = EMAIL_PORT;
+        $this->mail->SMTPAuth = true;
+        $this->mail->Username = EMAIL_USER;
+        $this->mail->Password = EMAIL_PASSWORD;
+        $this->mail->setFrom('your@email.com.br', 'Your email name');
     }
 
-    public function index()
+    public function index($data = [])
     {
-        $subject = "Email Subject";
-        $altbody = "Email AltBody";
-
-        $body = "
-            <h1>Hello World!</h1>
-            <p>Lorem Ipsum</p>
-        ";
-
-        try {
-            $this->mail->set("sender@email.com.br", "Sender Name");
-            $this->mail->add("recipient@email.com.br", "Recipient Name");
-            $this->mail->content($subject, $body, $altbody);
-            $this->mail->send();
+        $this->mail->Subject = $data['subject'];
+        $this->mail->AltBody = $data['altbody'];
+        foreach ($data['recipients']  as $recipient) {  
+            $this->mail->addAddress($recipient['email'], $recipient['name']);
+        }
+        $this->mail->msgHTML($data['msgHTML']);
+        if (!$this->mail->send()) {
+            echo json_encode(['status'=>400, 'error'=>$this->mail->ErrorInfo]);
+            exit;
+        } else {
             return true;
-
-        } catch (\Exception $e) {
-            echo "Error sending email!: {$e}";
         }
     }
 
