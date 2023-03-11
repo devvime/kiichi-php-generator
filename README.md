@@ -74,7 +74,7 @@ Result:
 Type the following command informing the name of the mail controller.
 
 ```
-composer new mail news
+composer new mail
 ```
 
 Result:
@@ -82,5 +82,5 @@ Result:
 ```
 ├── App
 |  ├── Controllers
-│  |  └── NewsController.php
+│  |  └── EmailServiceController.php
 ```
