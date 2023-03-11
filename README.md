@@ -71,7 +71,7 @@ Result:
 
 ### Create new email controller
 
-Type the following command informing the name of the mail controller.
+Type the following command.
 
 ```
 composer new mail
