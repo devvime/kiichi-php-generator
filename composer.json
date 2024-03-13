@@ -9,6 +9,9 @@
       "email": "victor@susumo.com.br"
     }
   ],
+  "scripts": {
+    "build": "php build.php"
+  },
   "autoload": {
     "psr-4": {
       "Devvime\\kiichi\\Generator\\": "src/"
