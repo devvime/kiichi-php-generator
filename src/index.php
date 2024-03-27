@@ -4,9 +4,11 @@ require_once('functions.php');
 
 $command = isset($argv[1]) ? $argv[1] : '';
 
+verify_dir();
+
 switch($command) {
     case '':
-        message('kiichii', '');
+        message('kiichi', '');
     break;
     case 'controller':
         controller_action($argv);
