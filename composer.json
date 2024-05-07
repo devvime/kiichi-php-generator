@@ -1,11 +1,11 @@
 {
   "name": "devvime/kiichi-php-generator",
   "description": "Simple Package PHP for generate controllers, models and middlewares.",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "license": "MIT",
   "authors": [
     {
-      "name": "Victor Alves Mendes",
+      "name": "Victor Mendes",
       "email": "victor@susumo.com.br"
     }
   ],
@@ -18,6 +18,6 @@
     }
   },
   "require": {
-    "php": ">=7.0.0"
+    "php": ">=8.2.0"
   }
 }

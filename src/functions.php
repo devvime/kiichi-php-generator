@@ -42,9 +42,9 @@ function message($type, $text)
 
 function verify_dir()
 {
-  $controller_dir = 'App/Controllers';
-  $models_dir = 'App/Models';
-  $middlewares_dir = 'App/Middlewares';
+  $controller_dir = 'src/Controllers';
+  $models_dir = 'src/Models';
+  $middlewares_dir = 'src/Middlewares';
   if (!is_dir($controller_dir)) mkdir($controller_dir, 0777, true);
   if (!is_dir($models_dir))mkdir($models_dir, 0777, true);
   if (!is_dir($middlewares_dir))mkdir($middlewares_dir, 0777, true);
@@ -102,19 +102,19 @@ function controller_action($argv)
     }
     $content = getTpl('controller', $argv);
     $modelContent = getTpl('model', $argv);
-    if (file_exists("App/Controllers/".ucfirst($argv[2])."Controller.php")) {
-        message('warning', "The controller '".ucfirst($argv[2])."' already exists in 'App/Controllers/".ucfirst($argv[2])."Controller.php'");
+    if (file_exists("src/Controllers/".ucfirst($argv[2])."Controller.php")) {
+        message('warning', "The controller '".ucfirst($argv[2])."' already exists in 'src/Controllers/".ucfirst($argv[2])."Controller.php'");
         exit;
     } else {
-        $fp = fopen("App/Controllers/".ucfirst($argv[2])."Controller.php","wb");
+        $fp = fopen("src/Controllers/".ucfirst($argv[2])."Controller.php","wb");
         fwrite($fp, $content);
         fclose($fp);
-        message('success', "Controller created in 'App/Controllers/".ucfirst($argv[2])."Controller.php'");
+        message('success', "Controller created in 'src/Controllers/".ucfirst($argv[2])."Controller.php'");
         loading();
-        $md = fopen("App/Models/".ucfirst($argv[2])."Model.php","wb");
+        $md = fopen("src/Models/".ucfirst($argv[2])."Model.php","wb");
         fwrite($md, $modelContent);
         fclose($md);
-        message('success', "Model created in 'App/Models/".ucfirst($argv[2])."Model.php'");
+        message('success', "Model created in 'src/Models/".ucfirst($argv[2])."Model.php'");
     }
 }
 
@@ -126,14 +126,14 @@ function middleware_action($argv)
         exit;
     }
     $content = getTpl('middleware', $argv);
-    if (file_exists("App/Middlewares/".ucfirst($argv[2])."Middleware.php")) {
-        message('warning', "The controller '".ucfirst($argv[2])."' already exists in 'App/Middlewares/".ucfirst($argv[2])."Middleware.php'");
+    if (file_exists("src/Middlewares/".ucfirst($argv[2])."Middleware.php")) {
+        message('warning', "The controller '".ucfirst($argv[2])."' already exists in 'src/Middlewares/".ucfirst($argv[2])."Middleware.php'");
         exit;
     } else {
-        $fp = fopen("App/Middlewares/".ucfirst($argv[2])."Middleware.php","wb");
+        $fp = fopen("src/Middlewares/".ucfirst($argv[2])."Middleware.php","wb");
         fwrite($fp, $content);
         fclose($fp);
-        message('success', "Middleware created in 'App/Middlewares/".ucfirst($argv[2])."Middleware.php'");
+        message('success', "Middleware created in 'src/Middlewares/".ucfirst($argv[2])."Middleware.php'");
     }
 }
 
@@ -141,13 +141,13 @@ function mail_action($argv)
 {
     loading();
     $content = getTpl('mail', $argv);
-    if (file_exists("App/Controllers/EmailServiceController.php")) {
-        message('warning', "The EmailServiceController already exists in 'App/Controllers/EmailServiceController.php'");
+    if (file_exists("src/Controllers/EmailServiceController.php")) {
+        message('warning', "The EmailServiceController already exists in 'src/Controllers/EmailServiceController.php'");
         exit;
     } else {
-        $fp = fopen("App/Controllers/EmailServiceController.php","wb");
+        $fp = fopen("src/Controllers/EmailServiceController.php","wb");
         fwrite($fp, $content);
         fclose($fp);
-        message('success', "EmailServiceController created in 'App/Controllers/EmailServiceController.php'");
+        message('success', "EmailServiceController created in 'src/Controllers/EmailServiceController.php'");
     }
 }
