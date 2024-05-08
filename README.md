@@ -6,7 +6,7 @@ Simple Package PHP for generate controllers, models and middlewares.
 
 ### Specifications and Dependencies
 
-- **PHP Version** >= 7.0.0
+- **PHP Version** >= 8.2.0
 
 #### install packages
 
@@ -29,7 +29,7 @@ After, in composer.json insert this script.
 Create the following directories in the project root:
 
 ```
-├── App
+├── src
 |  ├── Controllers
 |  |── Models
 |  |── Middlewares
@@ -46,7 +46,7 @@ composer new controller product products
 Result:
 
 ```
-├── App
+├── src
 |  ├── Controllers
 │  |  └── ProductController.php
 |  |── Models
@@ -64,7 +64,7 @@ composer new middleware product
 Result:
 
 ```
-├── App
+├── src
 |  ├── Middlewares
 │  |  └── ProductMiddleware.php
 ```
@@ -80,7 +80,7 @@ composer new mail
 Result:
 
 ```
-├── App
+├── src
 |  ├── Controllers
 │  |  └── EmailServiceController.php
 ```
