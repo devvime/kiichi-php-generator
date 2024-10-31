@@ -1,5 +1,8 @@
 <?php
 
+# configuration
+# - php.ini -> phar.readonly = Off
+
 require_once('functions.php');
 
 $command = isset($argv[1]) ? $argv[1] : '';
@@ -18,5 +21,8 @@ switch($command) {
     break;
     case 'mail':
         mail_action($argv);
+    break;
+    case 'start':
+        start_server($argv);
     break;
 }

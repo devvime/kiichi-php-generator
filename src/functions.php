@@ -151,3 +151,12 @@ function mail_action($argv)
         message('success', "EmailServiceController created in 'src/Controllers/EmailServiceController.php'");
     }
 }
+
+function start_server($argv) 
+{
+    $command = "php -S localhost:8080 -t public";
+    message('success', "Server started on port 8080 (localhost:8080)");
+    loading();
+    shell_exec($command);
+    exit;
+}
