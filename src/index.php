@@ -13,13 +13,13 @@ switch($command) {
     case '':
         message('kiichi', '');
     break;
-    case 'controller':
+    case 'new-controller':
         controller_action($argv);
     break;
-    case 'middleware':
+    case 'new-middleware':
         middleware_action($argv);
     break;
-    case 'mail':
+    case 'new-mail':
         mail_action($argv);
     break;
     case 'start':

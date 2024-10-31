@@ -28,14 +28,17 @@ function message($type, $text)
         echo "\n";
       break;
       case 'kiichi':
-        echo "\033[02;32m░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\033[0m \n";
-        echo "\033[02;32m░░░░░░░KIICHII PHP GENERATOR!░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\033[0m \n";
-        echo "\033[02;32m░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\033[0m \n";
-        echo "\033[02;32m░░░░░░░COMMANDS:░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\033[0m \n";
-        echo "\033[02;32m░░░░░░░- cotroller -name -tableName (ex: controller MyController products)░░░░░\033[0m \n";
-        echo "\033[02;32m░░░░░░░- middleware -name (ex: middleware MyMiddleware)░░░░░░░░░░░░░░░░░░░░░░░░\033[0m \n";
-        echo "\033[02;32m░░░░░░░- mail -name (ex: mail MyMail)░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\033[0m \n";
-        echo "\033[02;32m░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\033[0m \n";
+        echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n";
+        echo "░░                                                                                            ░░\n";
+        echo "░░    COMMANDS:                                                                               ░░\n";
+        echo "░░    - start (ex: php kiichi start) - init server on localhost:8080                          ░░\n";
+        echo "░░    - new-cotroller -name -tableName (ex: php kiichi new-controller MyController products)  ░░\n";
+        echo "░░        - new-cotroller -name -tableName --route /routeName (make route group)              ░░\n";
+        echo "░░    - new-middleware -name (ex: php kiichi new-middleware MyMiddleware)                     ░░\n";
+        echo "░░    - new-mail -name (ex: php kiichi new-mail MyMail)                                       ░░\n";
+        echo "░░                                                                                            ░░\n";
+        echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\n";
+        echo "\n";
       break;
     }
 }
@@ -87,6 +90,7 @@ function getTpl($file, $argv)
     $content = file_get_contents(__DIR__ . "/tpl/{$file}.txt");
     if (isset($argv[2])):
         $content = str_replace('{{$value[1]}}', ucfirst($argv[2]), $content);
+        $content = str_replace('{{$value[5]}}', $argv[5], $content);
         $content = str_replace('{$value[1]}', $argv[2], $content);
     endif;
     if (isset($argv[3])) $content = str_replace('{$tableName[1]}', $argv[3], $content);
@@ -97,7 +101,11 @@ function controller_action($argv)
 {
     loading();
     if (!isset($argv[3])) {
-        message('error', 'Need to inform the name of the database table! EX: composer new controller controllerName tableName');
+        message('error', 'Need to inform the name of the database table! EX: php kiichi new-controller controllerName tableName');
+        exit;
+    }
+    if (isset($argv[4]) && !isset($argv[5])) {
+        message('error', 'Need to inform the name of the route group! EX: php kiichi new-controller controllerName tableName --route /routeName');
         exit;
     }
     $content = getTpl('controller', $argv);
@@ -115,6 +123,21 @@ function controller_action($argv)
         fwrite($md, $modelContent);
         fclose($md);
         message('success', "Model created in 'src/Models/".ucfirst($argv[2])."Model.php'");
+        if (isset($argv[4])) {
+            switch ($argv[4]) {
+                case '--route':
+                    loading();
+                    $routesTpl = getTpl('routes', $argv);
+                    $content = file_get_contents(__DIR__ . "/Routes/api.php");
+                    $content = $content . "\n\n" . $routesTpl;
+                    $fp = fopen("src/Routes/api.php","wb");
+                    fwrite($fp, $content);
+                    fclose($fp);
+                    message('success', "Route group created in 'src/Routes/api.php'");
+                break;
+            }
+            exit;
+        }
     }
 }
 
@@ -122,7 +145,7 @@ function middleware_action($argv)
 {
     loading();
     if (!isset($argv[2])) {
-        message('error', 'Need to inform the name of the middleware! EX: composer new middleware name');
+        message('error', 'Need to inform the name of the middleware! EX: php kiichi new-middleware name');
         exit;
     }
     $content = getTpl('middleware', $argv);

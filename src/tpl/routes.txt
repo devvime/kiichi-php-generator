@@ -1,0 +1,7 @@
+$router->group('{{$value[5]}}', function () use ($router) {
+  $router->get('', '{{$value[1]}}Controller@index');
+  $router->get('/:id', '{{$value[1]}}Controller@find');
+  $router->post('', '{{$value[1]}}Controller@store');
+  $router->put('/:id', '{{$value[1]}}Controller@update');
+  $router->delete('/:id', '{{$value[1]}}Controller@destroy');
+}, 'AuthMiddleware@index');

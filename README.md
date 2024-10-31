@@ -16,14 +16,6 @@ Run the composer command for install this package.
 composer require devvime/kiichi-php-generator
 ```
 
-After, in composer.json insert this script.
-
-```json
-"scripts":{
-        "new": "php -f vendor/devvime/Kiichi-php-generator/src/index.php"
-    }
-```
-
 ### Create folder structure
 
 Create the following directories in the project root:
@@ -33,14 +25,31 @@ Create the following directories in the project root:
 |  ├── Controllers
 |  |── Models
 |  |── Middlewares
+|  |── Routes
+|  |  └── api.php
 ```
 
 ### Create Controller
 
-To create a new controller with the assistant, just type the following command, informing the name of the controller and the name of the database table that will be used -> EX: composer new controller controllerName tableName.
+To create a new controller with the assistant, just type the following command, informing the name of the controller and the name of the database table that will be used
+EX: php kiichi.phar new-controller controllerName tableName.
+
+```bash
+php kiichi.phar new-controller product products
+```
 
 ```
-composer new controller product products
+├── src
+|  ├── Controllers
+│  |  └── ProductController.php
+|  |── Models
+|  |  └── Products.php
+```
+
+To create the route group in the src/Routes/api.php file add --route /routeGroupName
+
+```bash
+php kiichi.phar new-controller product products --route /products
 ```
 
 Result:
@@ -51,6 +60,8 @@ Result:
 │  |  └── ProductController.php
 |  |── Models
 |  |  └── Products.php
+|  |── Routes
+|  |  └── api.php
 ```
 
 ### Create Middleware
@@ -58,7 +69,7 @@ Result:
 To create a new middleware with the wizard, just type the following command informing the name of the middleware.
 
 ```
-composer new middleware product
+php kiichi.phar new-middleware product
 ```
 
 Result:
@@ -74,7 +85,7 @@ Result:
 Type the following command.
 
 ```
-composer new mail
+php kiichi.phar new-mail
 ```
 
 Result:
