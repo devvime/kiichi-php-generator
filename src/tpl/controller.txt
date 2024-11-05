@@ -15,56 +15,104 @@ class {{$value[1]}}Controller extends ControllerService {
     }
 
     public function index($req, $res) {
-        $result = self::${$value[1]}Model->all();
-        $res->json([
-            "status"=>200,
-            "data"=>$result
-        ]);
+        try {
+            $result = $this->paginate($req, self::${$value[1]}Model->select('*'));
+            $res->json($result);
+        } catch (\Throwable $th) {
+            $res->json([
+                'status' => 400, 
+                'error' => true,
+                'message' => $th->getMessage()
+            ]);
+        }
     }
 
     public function find($req, $res)
     {
-        $result = {{$value[1]}}Model::find($req->params->id);
-        if ($result == null) {
-            $res->json(["status"=>404, "error"=>"Register Not Found..."]);
-            exit;
+        try {
+            $result = {{$value[1]}}Model::find($req->params->id);
+            if ($result == null) {
+                $res->json(["status"=>404, "error"=>true, "message"=>"Register Not Found..."]);
+                exit;
+            }
+            $res->json([
+                "staus"=>200,
+                "success"=>true,
+                "data"=>$result
+            ]);
+        } catch (\Throwable $th) {
+            $res->json([
+                'status' => 400, 
+                'error' => true,
+                'message' => $th->getMessage()
+            ]);
         }
-        $res->json([
-            "staus"=>200,
-            "data"=>$result
-        ]);
     }
 
     public function store($req, $res) {
-        $data = $this->bindValues($req->body, self::${$value[1]}Model);        
-        $result = $data->save();        
-        if ($result) {
-            $this->index($req, $res);
+        try {
+            $data = $this->bindValues($req->body, self::${$value[1]}Model);        
+            $result = $data->save();        
+            if ($result) {
+                $res->json([
+                    "staus"=>200,
+                    "success"=>true,
+                    "message"=>"Successfully created!",
+                    "data"=>$result
+                ]);
+            }
+        } catch (\Throwable $th) {
+            $res->json([
+                'status' => 400, 
+                'error' => true,
+                'message' => $th->getMessage()
+            ]);
         }
     }
 
     public function update($req, $res) {
-        $data = {{$value[1]}}Model::find($req->params->id);
-        if ($data == null) {
-            $res->json(["status"=>404, "error"=>"Register Not Found..."]);
-            exit;
-        }
-        $data = $this->bindValues($req->body, $data);
-        $result = $data->save();
-        if ($result) {
-            $this->find($req, $res);
+        try {
+            $data = {{$value[1]}}Model::find($req->params->id);
+            if ($data == null) {
+                $res->json(["status"=>404, "error"=>true, "message"=>"Register Not Found..."]);
+                exit;
+            }
+            $data = $this->bindValues($req->body, $data);
+            $result = $data->save();
+            if ($result) {
+                $this->find($req, $res);
+            }
+        } catch (\Throwable $th) {
+            $res->json([
+                'status' => 400, 
+                'error' => true,
+                'message' => $th->getMessage()
+            ]);
         }
     }
 
     public function destroy($req, $res) {
-        $data = {{$value[1]}}Model::find($req->params->id);
-        if ($data == null) {
-            $res->json(["status"=>404, "error"=>"Register not found!"]);
-            exit;
-        }
-        $result = $data->delete();
-        if ($result) {
-            $this->index($req, $res);
+        try {
+            $data = {{$value[1]}}Model::find($req->params->id);
+            if ($data == null) {
+                $res->json(["status"=>404, "error"=>true, "message"=>"Register Not Found..."]);
+                exit;
+            }
+            $result = $data->delete();
+            if ($result) {
+                $res->json([
+                    "staus"=>200,
+                    "success"=>true,
+                    "message"=>"Successfully deleted!",
+                    "data"=>$result
+                ]);
+            }
+        } catch (\Throwable $th) {
+            $res->json([
+                'status' => 400, 
+                'error' => true,
+                'message' => $th->getMessage()
+            ]);
         }
     }
 }
