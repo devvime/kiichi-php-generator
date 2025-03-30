@@ -177,9 +177,9 @@ function mail_action($argv)
 
 function start_server($argv) 
 {
-    $command = "php -S localhost:8080 -t public";
+    $command = "php -S localhost:8080 -t public_html";
     message('success', "Server started on port 8080 (localhost:8080)");
     loading();
-    shell_exec($command);
+    system($command);
     exit;
 }
