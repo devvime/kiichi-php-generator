@@ -13,7 +13,7 @@ Simple Package PHP for generate controllers, models and middlewares.
 Run the composer command for install this package.
 
 ```
-composer require devvime/kiichi-php-generator
+composer require devvime/kiichi-php-generator --dev
 ```
 
 ### Create folder structure
@@ -21,12 +21,12 @@ composer require devvime/kiichi-php-generator
 Create the following directories in the project root:
 
 ```
-├── src
+├── application
 |  ├── Controllers
 |  |── Models
 |  |── Middlewares
 |  |── Routes
-|  |  └── api.php
+|  |  └── server.php
 ```
 
 ### Create Controller
@@ -39,14 +39,14 @@ php kiichi.phar new-controller product products
 ```
 
 ```
-├── src
+├── application
 |  ├── Controllers
 │  |  └── ProductController.php
 |  |── Models
 |  |  └── Products.php
 ```
 
-To create the route group in the src/Routes/api.php file add --route /routeGroupName
+To create the route group in the application/Routes/api.php file add --route /routeGroupName
 
 ```bash
 php kiichi.phar new-controller product products --route /products
@@ -55,13 +55,13 @@ php kiichi.phar new-controller product products --route /products
 Result:
 
 ```
-├── src
+├── application
 |  ├── Controllers
 │  |  └── ProductController.php
 |  |── Models
 |  |  └── Products.php
 |  |── Routes
-|  |  └── api.php
+|  |  └── server.php
 ```
 
 ### Create Middleware
@@ -75,7 +75,7 @@ php kiichi.phar new-middleware product
 Result:
 
 ```
-├── src
+├── application
 |  ├── Middlewares
 │  |  └── ProductMiddleware.php
 ```
@@ -91,7 +91,22 @@ php kiichi.phar new-mail
 Result:
 
 ```
-├── src
+├── application
 |  ├── Controllers
 │  |  └── EmailServiceController.php
 ```
+
+### Start the development server
+
+Type the following command.
+
+```
+php kiichi.phar start
+```
+
+Result:
+
+```
+Development Server (http://localhost:8080) started
+```
+
